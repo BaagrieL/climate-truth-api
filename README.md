@@ -32,8 +32,10 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
 
 ---
 ## ▶️ Como rodar o projeto
+### 1. Instale o Node
+[Node](https://nodejs.org/pt)
 
-### 1. Clone o repositório
+### 2. Clone o repositório
 
 ```bash
 git clone https://github.com/BaagrieL/climate-truth-api.git
@@ -41,20 +43,19 @@ git clone https://github.com/BaagrieL/climate-truth-api.git
 cd climate-truth-api
 ```
 
-### 2. Instale as dependências
+### 3. Instale as dependências
 
 ```bash
 npm install
 ```
 
-### 3. Inicie o servidor
+### 4. Inicie o servidor
 ```bash
 npm run start
 ```
 
-### 4. Acesse o endereço
+### 5. Acesse o endereço
 [http://localhost:1084/submission](http://localhost:1084/submission)
-
 
 ---
 
@@ -163,7 +164,10 @@ Our mission is to amplify credible information, empower environmental movements,
 
 ## ▶️ How to run the project
 
-### 1. Clone the repository
+### 1. Install Node
+[Node](https://nodejs.org/pt)
+
+### 2. Clone the repository
 
 ```bash
 git clone https://github.com/BaagrieL/climate-truth-api.git
@@ -171,18 +175,18 @@ git clone https://github.com/BaagrieL/climate-truth-api.git
 cd climate-truth-api
 ```
 
-### 2. Install dependencies
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Start the server
+### 4. Start the server
 ```bash
 npm run start
 ```
 
-### 4. Access the address
+### 5. Access the address
 [http://localhost:1084/submission](http://localhost:1084/submission)
 
 
