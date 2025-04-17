@@ -1,0 +1,30 @@
+### GET
+GET http://localhost:1084/submission
+
+### GET BY ID - change id for tests
+GET http://localhost:1084/submission/filter?id=2bda7989-89e3-4e38-a2c1-41cc8cfd4c0f
+
+### GET BY TITLE
+GET http://localhost:1084/submission/filter?title=maior
+
+### REGISTER NEW SUBMISSIONS
+POST http://localhost:1084/submission/register
+Content-Type: application/json
+
+{
+    "title": "MENOR",
+    "content": "loren ipsun"
+}
+
+
+### DELETE A SUBMISSION BY ID - change id for tests
+DELETE http://localhost:1084/submission/delete/21d3179d-dcf3-48be-b30f-f46564bfe45e
+
+### UPDATE A SUBMISSION - change id for tests
+PATCH  http://localhost:1084/submission/update/21d3179d-dcf3-48be-b30f-f46564bfe45e
+Content-Type: application/json
+
+{
+    "title": "novo novo title",
+    "content": "content novo"
+}
