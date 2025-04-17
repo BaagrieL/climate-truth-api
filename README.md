@@ -21,6 +21,7 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
 ---
 
 ## 📚 Índice
+- [▶️ Como rodar o projeto](#como-rodar-o-projeto)
 
 - [📦 Submission](#submission)
   - [🔍 list](#list)
@@ -28,6 +29,32 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
   - [❌ delete](#delete)
   - [✏️ update](#update)
   - [🔎 getById](#getbyid)
+
+---
+## ▶️ Como rodar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/BaagrieL/climate-truth-api.git
+
+cd climate-truth-api
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+### 3. Inicie o servidor
+```bash
+npm run start
+```
+
+### 4. Acesse o endereço
+[http://localhost:1084/submission](http://localhost:1084/submission)
+
 
 ---
 
@@ -124,12 +151,40 @@ Our mission is to amplify credible information, empower environmental movements,
 
 ## 📚 Table of Contents
 
+- [▶️ How to run the project](#how-to-run-the-project)
 - [📦 Submission](#submission)
   - [🔍 list](#list)
   - [💾 save](#save)
   - [❌ delete](#delete)
   - [✏️ update](#update)
   - [🔎 getById](#getbyid)
+
+---
+
+## ▶️ How to run the project
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/BaagrieL/climate-truth-api.git
+
+cd climate-truth-api
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the server
+```bash
+npm run start
+```
+
+### 4. Access the address
+[http://localhost:1084/submission](http://localhost:1084/submission)
+
 
 ---
 
