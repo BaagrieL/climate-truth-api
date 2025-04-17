@@ -48,7 +48,6 @@ class SubmissionControler {
         }
 
         const submission = Submission.delete(id);
-        console.log(submission)
         
         if (!submission) {
             return res.status(404).json({ message: "Submission not found." });
