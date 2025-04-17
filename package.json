@@ -1,0 +1,28 @@
+{
+  "name": "climate-truth-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BaagrieL/climate-truth-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BaagrieL/climate-truth-api/issues"
+  },
+  "homepage": "https://github.com/BaagrieL/climate-truth-api#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9",
+    "uuid": "^11.1.0"
+  }
+}
