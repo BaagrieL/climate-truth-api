@@ -25,6 +25,7 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
 - [📑 Endpoints da API](#endpoints-da-api)
   - [🔹 GET ](#submissao)
   - [🔹 GET:id ](#submissoes)
+  - [🔹 GET:title ](#submissoes)
   - [🔹 POST ](#submission)
   - [🔹 PATCH ](#submissao)
   - [🔹 DELETE ](#deletar-submissao)
@@ -75,9 +76,17 @@ Retorna os dados de uma submissão específica pelo ID.
 
 **Parâmetros:**
 
+- `id` (string) – ID da submissão.
+
+#### 🔹 GET:
+```bash
+/submission/:title
+```
+Retorna os dados de uma lista de submissões pelo titulo.
+
+**Parâmetros:**
+
 - `title` (string) – Título da submissão.
-- `content` (string) – Conteúdo da submissão.
-- `type` (string) – Tipo da submissão.
 
 #### 🔹 POST:
 ```bash
@@ -121,6 +130,7 @@ Retorna uma mensagem de boas-vindas para testar se está tudo OK.
 - [📑 Endpoints da API](#endpoints-da-api)
   - [🔹 GET ](#post-submissao)
   - [🔹 GET:id ](#get-submissoes)
+  - [🔹 GET:title ](#get-submissoes)
   - [🔹 POST ](#get-submission)
   - [🔹 PATCH ](#post-submission)
   - [🔹 DELETE ](#delete-submission)
@@ -167,18 +177,29 @@ npm run start
 ```
 Returns all registered submissions.
 
-#### 🔹 GET:
+
+
+Here is the translation:
+
+#### GET:
 ```bash
 /submission/:id
 ```
-Returns the data for a specific submission by ID.
+Returns the data of a specific submission by ID.
 
 **Parameters:**
 
-- `title` (string) – Submission title.
-- `content` (string) – Submission content.
-- `type` (string) – Submission type.
+- `id` (string) - ID of the submission.
 
+#### GET:
+```bash
+/submission/:title
+```
+Returns the data of a list of submissions by title.
+
+**Parameters:**
+
+- `title` (string) - Title of the submission.
 #### 🔹 POST:
 ```bash
 /submission
