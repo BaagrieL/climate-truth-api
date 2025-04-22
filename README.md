@@ -22,12 +22,12 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
 
 ## 📚 Índice
 - [▶️ Como rodar o projeto](#como-rodar-o-projeto)
-
 - [📑 Endpoints da API](#endpoints-da-api)
-  - [🔹 POST ](#post-submissao)
-  - [🔹 GET ](#get-submissoes)
-  - [🔹 GET ](#get-submission)
-  - [🔹 POST ](#post-submission)
+  - [🔹 GET ](#submissao)
+  - [🔹 GET:id ](#submissoes)
+  - [🔹 POST ](#submission)
+  - [🔹 PATCH ](#submissao)
+  - [🔹 DELETE ](#deletar-submissao)
 
 ---
 ## ▶️ Como rodar o projeto
@@ -118,12 +118,13 @@ Retorna uma mensagem de boas-vindas para testar se está tudo OK.
 ## 📚 Table of Contents
 
 - [▶️ How to run the project](#how-to-run-the-project)
-- [📦 Submission](#submission)
-  - [🔍 list](#list)
-  - [💾 save](#save)
-  - [❌ delete](#delete)
-  - [✏️ update](#update)
-  - [🔎 getById](#getbyid)
+- [📑 Endpoints da API](#endpoints-da-api)
+  - [🔹 GET ](#post-submissao)
+  - [🔹 GET:id ](#get-submissoes)
+  - [🔹 POST ](#get-submission)
+  - [🔹 PATCH ](#post-submission)
+  - [🔹 DELETE ](#delete-submission)
+
 
 ---
 
