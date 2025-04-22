@@ -1,9 +1,24 @@
+const StorageManager = require("../util/StorageManager");
+
 /**
  * Represents the submissions of the system.
  * @class Submission
- */
+*/
 class Submission {
     static #_submissions = new Map();
+
+    static #_submissionStorage = new StorageManager("submissions.json");
+
+    static init() {
+        const storedSubmissions = this.#_submissionStorage.read();
+
+        if (!storedSubmissions.length) return;
+        
+        for (const data of storedSubmissions) {
+            const submission = new Submission(data[1]);
+            this.#_submissions.set(submission.id, submission);
+        }                
+    }
 
     /**
      * Create a new submission.
@@ -25,7 +40,7 @@ class Submission {
     }
 
     static listBytitle(title) {
-        return Array.from(this.#_submissions.values()).filter(submission => submission.title === title);
+        return Array.from(this.#_submissions.values()).filter(submission => submission.title.toLowerCase() === title.toLowerCase());
     }
 
     /**
@@ -34,6 +49,7 @@ class Submission {
      */
     static save(submission) {
         this.#_submissions.set(submission.id, submission);
+        this.#_submissionStorage.write(Array.from(this.#_submissions));
     }
 
     /**
@@ -43,7 +59,12 @@ class Submission {
      */
     static delete(id) {
         const deleted = this.#_submissions.delete(id);
-        return deleted ? new Submission({ id }) : null;
+        
+        if (!deleted) return null;
+
+        this.#_submissionStorage.write(Array.from(this.#_submissions));
+
+        return new Submission({ id });
     }
 
     /**
@@ -58,6 +79,8 @@ class Submission {
 
         submission.title = newData.title ?? submission.title;
         submission.content = newData.content ?? submission.content;
+
+        this.#_submissionStorage.write(Array.from(this.#_submissions));
 
         return submission;
     }

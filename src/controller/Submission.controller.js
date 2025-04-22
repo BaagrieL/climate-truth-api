@@ -19,7 +19,7 @@ class SubmissionControler {
             return res.status(400).json({ message: "Id or title is required." });
         }
 
-        if (!submission || !submission.length) {
+        if (!submission) {
             return res.status(404).json({ message: "Submission not found." });
         }
 
