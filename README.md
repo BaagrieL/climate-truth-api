@@ -124,6 +124,21 @@ Retorna uma mensagem de boas-vindas para testar se está tudo OK.
 
 ---
 
+## 🌎 English Version
+**This repository was developed as part of the "Mini Project" of Module 4 (M4) of the PDA course.**
+
+The Climate Truth API is a community-driven platform focused on gathering and curating reliable news and articles about climate change and environmental issues.
+
+Supporters can submit trustworthy content, which is then reviewed and approved by volunteer curators before being published.
+
+Our mission is to amplify credible information, empower environmental movements, and provide a safe and transparent space to counter misinformation without giving it a platform.
+
+- 📚 Submit and share reliable climate news
+- ✅ Community-driven moderation
+- 🌍 Open and transparent information hub
+
+---
+
 ## 📚 Table of Contents
 
 - [▶️ How to run the project](#how-to-run-the-project)
