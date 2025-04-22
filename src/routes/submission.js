@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { authenticateToken }  = require("../middleware/auth.middleware");
 const { SubmissionControler } = require("../controller/Submission.controller");
 
 
@@ -8,7 +9,7 @@ const controller = new SubmissionControler();
 
 submissionRouter.get("/", controller.listAllSubmissions);
 
-submissionRouter.get("/filter", controller.getSubmissionByFilter);
+submissionRouter.get("/filter", authenticateToken, controller.getSubmissionByFilter);
 
 submissionRouter.post("/register", controller.createSubmission);
 

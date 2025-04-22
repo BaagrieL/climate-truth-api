@@ -1,0 +1,6 @@
+const { login } = require("../controller/auth.controller");
+const router = express.Router();
+
+router.post("/login", login);
+
+module.exports = router;
