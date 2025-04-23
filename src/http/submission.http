@@ -2,7 +2,8 @@
 GET http://localhost:1084/submission
 
 ### GET BY ID - change id for tests
-GET http://localhost:1084/submission/filter?id=2bda7989-89e3-4e38-a2c1-41cc8cfd4c0f
+GET http://localhost:1084/submission/filter?id=c6be3e79-1c57-4f33-8fc8-dec25f61f738
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzQ1MzY0MTcxLCJleHAiOjE3NDUzNjc3NzF9.9cxPCyzRV5PI6v1QZzfFkABda2xzgvgdWP_HvM0AXiI
 
 ### GET BY TITLE
 GET http://localhost:1084/submission/filter?title=maior
@@ -12,7 +13,7 @@ POST http://localhost:1084/submission/register
 Content-Type: application/json
 
 {
-    "title": "MENOR",
+    "title": "Maior",
     "content": "loren ipsun"
 }
 

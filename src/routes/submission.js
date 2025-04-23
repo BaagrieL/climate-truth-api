@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { authenticateToken }  = require("../middleware/auth.middleware");
+const authenticateToken = require("../middleware/auth.middleware");
 const { SubmissionControler } = require("../controller/Submission.controller");
 
 
