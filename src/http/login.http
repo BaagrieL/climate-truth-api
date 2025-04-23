@@ -1,5 +1,5 @@
 ### Login - gera o token
-POST http://localhost:1084/login
+POST http://localhost:1084/auth/login
 Content-Type: application/json
 
 {

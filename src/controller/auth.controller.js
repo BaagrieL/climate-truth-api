@@ -1,15 +1,34 @@
 const jwt = require("jsonwebtoken");
+const { User } = require("../model/User.model");
 
-function login(req, res) {
-    const { username, password } = req.body;
+class AuthControler {
+    login(req, res) {
+        const { username, password } = req.body;
 
-    // Esse é só um exemplo simplificado, sem banco
-    if (username === "admin" && password === "1234") {
-        const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        return res.json({ token });
+        if (!username || !password) return res.status(401).json({ error: "Credenciais inválidas" });
+
+        if(!User.userExists(username)) return res.status(401).json({ error: "Invalid username or password"});
+
+        const user = new User( username, password );
+
+
     }
 
-    return res.status(401).json({ error: "Credenciais inválidas" });
+    registerUSer(req, res) {
+        const { username, password } = req.body;
+
+        if (!username || !password) return res.status(401).json({ error: "Credenciais inválidas" });
+        
+        if (User.userExists(username)) {
+            return res.status(401).json({ error: "Username alredy exists" });
+        }
+    
+        const newUser = new User({ username, password });
+        User.save(newUser);
+
+        return res.status(201).json({ message: "User created successfully" });
+    }
 }
 
-module.exports = { login };
+
+module.exports = { AuthControler };

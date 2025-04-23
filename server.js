@@ -20,7 +20,7 @@ APP.get("/", (req, res) => {
 
 APP.use("/submission", submissionRouter);
 
-APP.use("/login", loginRouter)
+APP.use("/auth", loginRouter)
 
 APP.listen(PORT,() => {
     console.log(`Server running on port ${PORT}`);

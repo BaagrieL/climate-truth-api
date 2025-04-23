@@ -9,6 +9,11 @@ class Submission {
 
     static #_submissionStorage = new StorageManager("submissions.json");
 
+    /**
+     * Initialize the submission store by reading the stored data from the file system.
+     * If there are no stored submissions, it does nothing.
+     * Necessary to ensure the map is up to date with the database.
+     */
     static init() {
         const storedSubmissions = this.#_submissionStorage.read();
 
