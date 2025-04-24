@@ -8,7 +8,7 @@ class User {
      * Creates a new user.
      * @param {{ id: string, username: string, password: string, role: number }} data - The data of the user. The role property is an integer that represents the user's role in the system.
      */
-    constructor({ id, username, password, role = "common" }) {
+    constructor({ id, username, password, role }) {
         this.id = id;
         this.username = username;
         this.password = password;
