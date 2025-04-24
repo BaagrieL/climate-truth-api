@@ -116,6 +116,8 @@ class Submission {
         
         submission.status = status;
         this.update(id, submission);
+
+        return submission;
     }
     
 }
