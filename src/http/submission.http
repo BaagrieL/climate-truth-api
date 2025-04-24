@@ -2,30 +2,41 @@
 GET http://localhost:1084/submission
 
 ### GET BY ID - change id for tests
-GET http://localhost:1084/submission/filter?id=c6be3e79-1c57-4f33-8fc8-dec25f61f738
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzQ1MzY0MTcxLCJleHAiOjE3NDUzNjc3NzF9.9cxPCyzRV5PI6v1QZzfFkABda2xzgvgdWP_HvM0AXiI
+GET http://localhost:1084/submission/filter?id=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3NDU0NTQ2MzIsImV4cCI6MTc0NTQ1ODIzMn0._ejpzChahPDvpnoieQWBgAnZHr7agFAOl-eKc-w1Ijc
 
 ### GET BY TITLE
-GET http://localhost:1084/submission/filter?title=maior
+GET http://localhost:1084/submission/filter?title=
 
 ### REGISTER NEW SUBMISSIONS
 POST http://localhost:1084/submission/register
 Content-Type: application/json
 
 {
-    "title": "Maior",
+    "title": "MENOR",
     "content": "loren ipsun"
 }
 
 
 ### DELETE A SUBMISSION BY ID - change id for tests
-DELETE http://localhost:1084/submission/delete/21d3179d-dcf3-48be-b30f-f46564bfe45e
+DELETE http://localhost:1084/submission/delete/
+
 
 ### UPDATE A SUBMISSION - change id for tests
-PATCH  http://localhost:1084/submission/update/21d3179d-dcf3-48be-b30f-f46564bfe45e
+PATCH  http://localhost:1084/submission/update/
 Content-Type: application/json
 
 {
     "title": "novo novo title",
     "content": "content novo"
+}
+
+
+### UPDATE SUBMISSION'S STATUS - change id for tests
+PATCH  http://localhost:1084/submission/update/89707804-aba3-4b57-8da1-14ba68f0e98e/status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3NDU0NjMyMDUsImV4cCI6MTc0NTQ2NjgwNX0.TgJMZYYL0cwFfu8MRPHheICLlL02WagNdQPlOBgTrMM
+
+{
+    "status": "rejected"
 }

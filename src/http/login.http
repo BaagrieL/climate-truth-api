@@ -3,6 +3,19 @@ POST http://localhost:1084/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "1234"
+    "username": "Gabriel",
+    "password": "098"
 }
+
+
+### REGISTER - register new users
+POST http://localhost:1084/auth/register
+Content-Type: application/json
+
+{
+    "username": "Gabriel",
+    "password": "098"
+}
+
+### GET - 
+GET http://localhost:1084/auth/

@@ -3,6 +3,7 @@ const requestLogger = require("./src/middleware/logger.middleware");
 const submissionRouter = require("./src/routes/submission");
 const loginRouter = require("./src/routes/auth")
 const { Submission } = require("./src/model/Submission.model");
+const { User } = require("./src/model/User.model");
 require("dotenv").config();
 
 const APP = express();
@@ -13,6 +14,7 @@ APP.use(express.json());
 APP.use(requestLogger);
 
 Submission.init();
+User.init();
 
 APP.get("/", (req, res) => {
     res.send("Hello World!");

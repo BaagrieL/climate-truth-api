@@ -34,6 +34,7 @@ class Submission {
         this.title = title;
         this.content = content;
         this.type = type;
+        this.status = "pendente";
     }
 
     /**
@@ -84,6 +85,8 @@ class Submission {
 
         submission.title = newData.title ?? submission.title;
         submission.content = newData.content ?? submission.content;
+        submission.type = newData.type ?? submission.type;
+        submission.status = newData.status ?? submission.status;
 
         this.#_submissionStorage.write(Array.from(this.#_submissions));
 
@@ -98,6 +101,23 @@ class Submission {
     static getById(id) {
         return this.#_submissions.get(id);
     }
+
+    /**
+     * Updates the status of a submission by its id.
+     * @param {string} id - The id of the submission to update.
+     * @param {string} status - The new status of the submission.
+     * @throws {Error} If the submission is not found.
+     * @throws {Error} If the status is not provided.
+     */
+    static setStatus(id, status) {
+        const submission = this.getById(id);
+        if (!submission) throw new Error("Submission not found");
+        if (!status) throw new Error("Status is required")
+        
+        submission.status = status;
+        this.update(id, submission);
+    }
+    
 }
 
 module.exports = { Submission };

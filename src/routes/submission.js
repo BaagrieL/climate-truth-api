@@ -9,12 +9,14 @@ const controller = new SubmissionControler();
 
 submissionRouter.get("/", controller.listAllSubmissions);
 
-submissionRouter.get("/filter", authenticateToken, controller.getSubmissionByFilter);
+submissionRouter.get("/filter", controller.getSubmissionByFilter);
 
 submissionRouter.post("/register", controller.createSubmission);
 
-submissionRouter.delete("/delete/:id", controller.deleteSubmission);
+submissionRouter.delete("/delete/:id", authenticateToken, controller.deleteSubmission);
 
-submissionRouter.patch("/update/:id", controller.updateSubmission);
+submissionRouter.patch("/update/:id", authenticateToken, controller.updateSubmission);
+
+submissionRouter.patch("/update/:id/status", authenticateToken, controller.updateStatus)
 
 module.exports = submissionRouter;

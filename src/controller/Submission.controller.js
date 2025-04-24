@@ -73,6 +73,18 @@ class SubmissionControler {
 
         return res.status(200).json({ message: "Submission updated successfully.", submission });
     }
+
+    updateStatus(req, res) {
+        const { id } = req.params;
+        const { status } = req.body;
+    
+        try {
+            Submission.setStatus(id, status);
+            return res.json({ message: "Status updated successfully" });
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }      
+    }
 }
 
 module.exports = { SubmissionControler };

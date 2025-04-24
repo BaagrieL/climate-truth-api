@@ -8,21 +8,21 @@ class User {
      * Creates a new user.
      * @param {{ id: string, username: string, password: string, role: number }} data - The data of the user. The role property is an integer that represents the user's role in the system.
      */
-    constructor({ id, username, password, role }) {
+    constructor({ id, username, password, role = "" }) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
     }
 
-    init() {
+    static init() {
         const storedUsers = User.#_userStorage.read();
 
         if (!storedUsers.length) return;
         
         for (const data of storedUsers) {
             const user = new User(data[1]);
-            User.#_users.set(user.id, user);
+            this.#_users.set(user.id, user);
         }
     }
 
@@ -30,7 +30,7 @@ class User {
      * List all users.
      * @returns {User[]} The list of users.
      */
-    list() {
+    static list() {
         return Array.from(User.#_users.values());
     }
 
@@ -39,7 +39,7 @@ class User {
      * @param {string} id - The id of the user.
      * @returns {User | null} The user or null if not found.
      */
-    getUserById(id) {
+    static getUserById(id) {
         const user = User.#_users.get(id);
 
         if (!user) return null;
@@ -47,19 +47,16 @@ class User {
         return User.#_users.get(id);
     }
 
-
     /**
      * Checks if a user with the given username exists in the system.
      * @param {string} username - The username to check.
      * @returns {boolean} True if the user exists, false otherwise.
      */
-    userExists(username) {
-        function usernameExists(username) {
-            for (const user of User.#_users.values()) {
-                if (user.username === username) return true;
-            }
-            return false;
-        }        
+    static userExists(username) {
+        for (const user of User.#_users.values()) {
+            if (user.username === username) return true;
+        }
+        return false;
     }
 
 
@@ -69,18 +66,29 @@ class User {
      * @param {string} password - The password to verify.
      * @returns {User | null} The user if found, null otherwise.
      */
-    verifyUserData( username, password ) {
+    static verifyUserData( username, password ) {
         if (!username || !password) return null;
+        console.log(User.#_users.values());
 
         for (const user of User.#_users.values()) {
-            if (user.username === username && user.password === password) return user;
+            
+            if (user.username === username && user.password === password) {
+                console.log(user);
+                return user;
+            }
         }
+        console.log(username, password);
+        
 
         return null;
     }
 
 
-    save(user) {
+    /**
+     * Saves a user to the system.
+     * @param {User} user - The user to save.
+     */
+    static save(user) {
         User.#_users.set(user.id, user);
         User.#_userStorage.write(Array.from(User.#_users));
     }
@@ -124,3 +132,5 @@ class User {
     }
 
 }
+
+module.exports = { User };
