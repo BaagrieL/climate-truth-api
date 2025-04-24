@@ -22,14 +22,21 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
 
 ## 📚 Índice
 - [▶️ Como rodar o projeto](#como-rodar-o-projeto)
-- [📑 Endpoints da API](#endpoints-da-api)
-  - [🔹 GET ](#submissao)
-  - [🔹 GET:id ](#submissoes)
-  - [🔹 GET:title ](#submissoes)
-  - [🔹 POST ](#submission)
-  - [🔹 PATCH ](#submissao)
-  - [🔹 DELETE ](#deletar-submissao)
-
+- [🔐 Autenticação](#-autenticação)
+- [📦 Submissões `/submission`](#-submissões-submission)
+  - [GET `/submission`](#-get-submission)
+  - [GET `/submission/filter`](#-get-submissionfilter)
+  - [POST `/submission/register`](#-post-submissionregister)
+  - [DELETE `/submission/delete/:id`](#-delete-submissiondeleteid)
+  - [PATCH `/submission/update/:id`](#-patch-submissionupdateid)
+  - [PATCH `/submission/update/:id/status`](#-patch-submissionupdateidstatus)
+- [👤 Autenticação e Usuários `/auth`](#-autenticação-e-usuários-auth)
+  - [POST `/auth/login`](#-post-authlogin)
+  - [POST `/auth/register`](#-post-authregister)
+  - [GET `/auth/users`](#-get-authusers)
+  - [PATCH `/auth/update/:id/role`](#-patch-authupdateidrole)
+- [✅ Tabela de Permissões](#-status-de-autorização)
+- [🌳 Estrutura do Projeto](#estrutura-do-projeto)
 ---
 ## ▶️ Como rodar o projeto
 ### 1. Instale o Node
@@ -55,72 +62,192 @@ npm run start
 ```
 
 ### 5. Acesse o endereço
-[http://localhost:1084/submission](http://localhost:1084/submission)
+[http://localhost:1084/](http://localhost:1084/)
+
+#### retorno esperado:
+```bash
+Hello Wolrd!
+```
 
 ---
 
-## 📑 Endpoints da API
+## 🔐 Autenticação
 
+A autenticação é feita via **JWT**. Para acessar rotas protegidas, envie o token no cabeçalho:
 
-#### 🔹 GET:
-```bash
-/submissoes
+```http
+Authorization: Bearer <seu_token>
 ```
-Retorna todas as submissões cadastradas.
 
-#### 🔹 GET:
+---
+
+## 📦 Submissões (`/submission`)
+
+### 🔹 GET `/submission`
+Lista todas as submissões.  
+🔒 Requer token.
+
+---
+
+### 🔹 GET `/submission/filter`
+Filtra submissões com base em critérios definidos no query params.  
+🔒 Requer token.  
+Exemplo:
 ```bash
-/submission/:id
+/submission/filter?title=Primeriro Artigo
 ```
-Retorna os dados de uma submissão específica pelo ID.
 
-**Parâmetros:**
+---
 
-- `id` (string) – ID da submissão.
+### 🔹 POST `/submission/register`
+Cria uma nova submissão.  
+🔒 Requer token.
 
-#### 🔹 GET:
+**Corpo da requisição:**
+```json
+{
+  "title": "Título",
+  "content": "Conteúdo da submissão",
+  "type": "Tipo"
+}
+```
+
+---
+
+### 🔹 DELETE `/submission/delete/:id`
+Deleta uma submissão específica pelo id.  
+🔒 Requer token + Admin.
+
+---
+
+### 🔹 PATCH `/submission/update/:id`
+Atualiza os dados de uma submissão.  
+🔒 Requer token + Admin.
+
+**Corpo da requisição:**
+```json
+{
+  "title": "Novo título",
+  "content": "Novo conteúdo",
+  "type": "Novo tipo"
+}
+```
+
+---
+
+### 🔹 PATCH `/submission/update/:id/status`
+Atualiza **apenas o status** de uma submissão.
+Usada pelos admin para aceitar ou não uma submissão.  
+🔒 Requer token + Admin.
+
+**Corpo da requisição:**
+```json
+{
+  "status": "accepted" // ou "rejected"
+}
+```
+
+---
+
+## 👤 Autenticação e Usuários (`/auth`)
+
+### 🔸 POST `/auth/login`
+Faz login de um usuário.  
+**Público.**
+
+**Corpo da requisição:**
+```json
+{
+  "username": "nome",
+  "password": "senha"
+}
+```
+
+---
+
+### 🔸 POST `/auth/register`
+Cadastra um novo usuário.  
+**Público.**
+
+**Corpo da requisição:**
+```json
+{
+  "username": "nome",
+  "password": "senha"
+}
+```
+
+---
+
+### 🔸 GET `/auth/users`
+Lista todos os usuários.  
+🔒 Requer token + Admin.
+
+---
+
+### 🔸 PATCH `/auth/update/:id/role`
+Atualiza o nível de acesso de um usuário.  
+🔒 Requer token + Admin.
+
+**Corpo da requisição:**
+```json
+{
+  "role": "admin" // ou "common" para um usuário padrão
+}
+```
+
+---
+
+## ✅ Status de Autorização
+
+| Rota                               | Autenticação | Admin |
+|------------------------------------|---------------|--------|
+| `POST /auth/login`                | ❌            | ❌     |
+| `POST /auth/register`             | ❌            | ❌     |
+| `GET /auth/users`                 | ✅            | ✅     |
+| `PATCH /auth/update/:id/role`     | ✅            | ✅     |
+| `GET /submission`                 | ✅            | ❌     |
+| `GET /submission/filter`          | ✅            | ❌     |
+| `POST /submission/register`       | ✅            | ❌     |
+| `DELETE /submission/delete/:id`   | ✅            | ✅     |
+| `PATCH /submission/update/:id`    | ✅            | ✅     |
+| `PATCH /submission/update/:id/status` | ✅         | ✅     |
+
+## 🌳 Estrutura do Projeto
 ```bash
-/submission/:title
+├── src/
+│   ├── controller/
+│   │   ├── auth.controller.js
+│   │   ├── Submission.controller.js
+│   │   └── User.controller.js
+│   ├── data/ **gerado automaticamente**
+│   │   ├── submissions.json
+│   │   └── users.json
+│   ├── http/ 
+│   │   ├── login.http
+│   │   └── submission.http
+│   ├── logs/ **gerado automaticamente**
+│   │   └── api.log
+│   ├── middleware/
+│   │   ├── auth.middleware.js
+│   │   ├── authAdmin.middleware.js
+│   │   └── logger.middleware.js
+│   ├── model/
+│   │   ├── Submission.model.js
+│   │   └── User.model.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── submission.js
+│   └── util/
+│       ├── Logger.js
+│       └── StorageManager.js
+├── .env
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+└── server.js
 ```
-Retorna os dados de uma lista de submissões pelo titulo.
-
-**Parâmetros:**
-
-- `title` (string) – Título da submissão.
-
-#### 🔹 POST:
-```bash
-/submissao
-```
-Cria uma nova submissão.
-
-
-#### 🔹 PATCH:
-```bash
-/submission/:id
-```
-Atualiza os dados de uma submissão específica pelo ID.
-
-**Parâmetros:**
-
-- `title` (string) – Novo título da submissão.
-- `content` (string) – Novo conteúdo da submissão.
-- `type` (string) – Novo tipo da submissão.
-
-
-
-#### 🔹 DELETE:
-```bash
-/submission/:id
-```
-Deleta uma submissão específica pelo ID.
-
-#### 🔹 GET:
-```bash
-/
-```
-Retorna uma mensagem de boas-vindas para testar se está tudo OK.
-
 
 ---
 
@@ -139,24 +266,32 @@ Our mission is to amplify credible information, empower environmental movements,
 
 ---
 
-## 📚 Table of Contents
-
-- [▶️ How to run the project](#how-to-run-the-project)
-- [📑 Endpoints da API](#endpoints-da-api)
-  - [🔹 GET ](#post-submissao)
-  - [🔹 GET:id ](#get-submissoes)
-  - [🔹 GET:title ](#get-submissoes)
-  - [🔹 POST ](#get-submission)
-  - [🔹 PATCH ](#post-submission)
-  - [🔹 DELETE ](#delete-submission)
-
+Aqui está a versão em inglês, fiel à estrutura do original:
 
 ---
 
-## ▶️ How to run the project
+## 📚 Index
+- [▶️ How to run the project](#how-to-run-the-project)
+- [🔐 Authentication](#authentication)
+- [📦 Submissions `/submission`](#submissions-submission)
+  - [GET `/submission`](#get-submission)
+  - [GET `/submission/filter`](#get-submissionfilter)
+  - [POST `/submission/register`](#post-submissionregister)
+  - [DELETE `/submission/delete/:id`](#delete-submissiondeleteid)
+  - [PATCH `/submission/update/:id`](#patch-submissionupdateid)
+  - [PATCH `/submission/update/:id/status`](#patch-submissionupdateidstatus)
+- [👤 Authentication and Users `/auth`](#authentication-and-users-auth)
+  - [POST `/auth/login`](#post-authlogin)
+  - [POST `/auth/register`](#post-authregister)
+  - [GET `/auth/users`](#get-authusers)
+  - [PATCH `/auth/update/:id/role`](#patch-authupdateidrole)
+- [✅ Authorization Table](#authorization-status)
+- [🌳 Project Structure](#project-structure)
+---
 
+## ▶️ How to run the project
 ### 1. Install Node
-[Node](https://nodejs.org/pt)
+[Node](https://nodejs.org/en)
 
 ### 2. Clone the repository
 
@@ -177,73 +312,190 @@ npm install
 npm run start
 ```
 
-### 5. Access the address
-[http://localhost:1084/submission](http://localhost:1084/submission)
+### 5. Access the URL
+[http://localhost:1084/](http://localhost:1084/)
 
+#### Expected return:
+```bash
+Hello Wolrd!
+```
 
 ---
 
-## 📑 API Endpoints
+## 🔐 Authentication
 
+Authentication is handled via **JWT**. To access protected routes, send the token in the header:
 
-#### 🔹 GET:
-```bash
-/submissions
+```http
+Authorization: Bearer <your_token>
 ```
-Returns all registered submissions.
 
+---
 
+## 📦 Submissions (`/submission`)
 
-Here is the translation:
+### 🔹 GET `/submission`
+Lists all submissions.  
+🔒 Requires token.
 
-#### GET:
+---
+
+### 🔹 GET `/submission/filter`
+Filters submissions based on query parameters.  
+🔒 Requires token.  
+Example:
 ```bash
-/submission/:id
+/submission/filter?title=First Article
 ```
-Returns the data of a specific submission by ID.
 
-**Parameters:**
+---
 
-- `id` (string) - ID of the submission.
+### 🔹 POST `/submission/register`
+Creates a new submission.  
+🔒 Requires token.
 
-#### GET:
+**Request body:**
+```json
+{
+  "title": "Title",
+  "content": "Submission content",
+  "type": "Type"
+}
+```
+
+---
+
+### 🔹 DELETE `/submission/delete/:id`
+Deletes a specific submission by ID.  
+🔒 Requires token + Admin.
+
+---
+
+### 🔹 PATCH `/submission/update/:id`
+Updates a submission's data.  
+🔒 Requires token + Admin.
+
+**Request body:**
+```json
+{
+  "title": "New title",
+  "content": "New content",
+  "type": "New type"
+}
+```
+
+---
+
+### 🔹 PATCH `/submission/update/:id/status`
+Updates **only the status** of a submission.  
+Used by admins to accept or reject a submission.  
+🔒 Requires token + Admin.
+
+**Request body:**
+```json
+{
+  "status": "accepted" // or "rejected"
+}
+```
+
+---
+
+## 👤 Authentication and Users (`/auth`)
+
+### 🔸 POST `/auth/login`
+Logs a user in.  
+**Public.**
+
+**Request body:**
+```json
+{
+  "username": "name",
+  "password": "password"
+}
+```
+
+---
+
+### 🔸 POST `/auth/register`
+Registers a new user.  
+**Public.**
+
+**Request body:**
+```json
+{
+  "username": "name",
+  "password": "password"
+}
+```
+
+---
+
+### 🔸 GET `/auth/users`
+Lists all users.  
+🔒 Requires token + Admin.
+
+---
+
+### 🔸 PATCH `/auth/update/:id/role`
+Updates a user's access level.  
+🔒 Requires token + Admin.
+
+**Request body:**
+```json
+{
+  "role": "admin" // or "common" for a regular user
+}
+```
+
+---
+
+## ✅ Authorization Status
+
+| Route                                  | Auth Required | Admin Only |
+|---------------------------------------|----------------|-------------|
+| `POST /auth/login`                    | ❌             | ❌          |
+| `POST /auth/register`                 | ❌             | ❌          |
+| `GET /auth/users`                     | ✅             | ✅          |
+| `PATCH /auth/update/:id/role`         | ✅             | ✅          |
+| `GET /submission`                     | ✅             | ❌          |
+| `GET /submission/filter`              | ✅             | ❌          |
+| `POST /submission/register`           | ✅             | ❌          |
+| `DELETE /submission/delete/:id`       | ✅             | ✅          |
+| `PATCH /submission/update/:id`        | ✅             | ✅          |
+| `PATCH /submission/update/:id/status` | ✅             | ✅          |
+
+## 🌳 Project Structure
 ```bash
-/submission/:title
+├── src/
+│   ├── controller/
+│   │   ├── auth.controller.js
+│   │   ├── Submission.controller.js
+│   │   └── User.controller.js
+│   ├── data/ **gerado automaticamente**
+│   │   ├── submissions.json
+│   │   └── users.json
+│   ├── http/ 
+│   │   ├── login.http
+│   │   └── submission.http
+│   ├── logs/ **gerado automaticamente**
+│   │   └── api.log
+│   ├── middleware/
+│   │   ├── auth.middleware.js
+│   │   ├── authAdmin.middleware.js
+│   │   └── logger.middleware.js
+│   ├── model/
+│   │   ├── Submission.model.js
+│   │   └── User.model.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── submission.js
+│   └── util/
+│       ├── Logger.js
+│       └── StorageManager.js
+├── .env
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+└── server.js
 ```
-Returns the data of a list of submissions by title.
-
-**Parameters:**
-
-- `title` (string) - Title of the submission.
-#### 🔹 POST:
-```bash
-/submission
-```
-Creates a new submission.
-
-
-#### 🔹 PATCH:
-```bash
-/submission/:id
-```
-Updates the data for a specific submission by ID.
-
-**Parameters:**
-
-- `title` (string) – New submission title.
-- `content` (string) – New submission content.
-- `type` (string) – New submission type.
-
-
-
-#### 🔹 DELETE:
-```bash
-/submission/:id
-```
-Deletes a specific submission by ID.
-
-#### 🔹 GET:
-```bash
-/
-```
-Returns a welcome message to test if everything is OK.
