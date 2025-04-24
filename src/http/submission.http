@@ -1,42 +1,46 @@
-### GET
+# Change the values of <token>, <id>, <title> and <content> to the desired ones.
+# To obtain the token, log in to the application and copy the authorization header token.
+
+
+### Get all submissions
 GET http://localhost:1084/submission
 
-### GET BY ID - change id for tests
-GET http://localhost:1084/submission/filter?id=
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3NDU0NTQ2MzIsImV4cCI6MTc0NTQ1ODIzMn0._ejpzChahPDvpnoieQWBgAnZHr7agFAOl-eKc-w1Ijc
+### Get submission by id
+GET http://localhost:1084/submission/filter?id=<id>
+Authorization: Bearer <token>
 
-### GET BY TITLE
-GET http://localhost:1084/submission/filter?title=
+### Get submission by title
+GET http://localhost:1084/submission/filter?title=<title>
 
-### REGISTER NEW SUBMISSIONS
+### Register new submission
 POST http://localhost:1084/submission/register
 Content-Type: application/json
 
 {
-    "title": "MENOR",
-    "content": "loren ipsun"
+    "title": "<title>",
+    "content": "<content>"
 }
 
+### Delete a submission by id
+DELETE http://localhost:1084/submission/delete/<id>
+Authorization: Bearer <token>
 
-### DELETE A SUBMISSION BY ID - change id for tests
-DELETE http://localhost:1084/submission/delete/
-
-
-### UPDATE A SUBMISSION - change id for tests
-PATCH  http://localhost:1084/submission/update/
+### Update a submission
+PATCH  http://localhost:1084/submission/update/<id>
 Content-Type: application/json
+Authorization: Bearer <token>
 
 {
-    "title": "novo novo title",
-    "content": "content novo"
+    "title": "<title>",
+    "content": "<content>"
 }
 
-
-### UPDATE SUBMISSION'S STATUS - change id for tests
-PATCH  http://localhost:1084/submission/update/89707804-aba3-4b57-8da1-14ba68f0e98e/status
+### Update submission's status
+PATCH  http://localhost:1084/submission/update/<id>/status
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3NDU0NjMyMDUsImV4cCI6MTc0NTQ2NjgwNX0.TgJMZYYL0cwFfu8MRPHheICLlL02WagNdQPlOBgTrMM
+Authorization: Bearer <token>
 
 {
-    "status": "rejected"
+    "status": "<status>"
 }
+
