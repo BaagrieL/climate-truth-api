@@ -23,6 +23,7 @@ Nossa missão é fortalecer a divulgação de informações verdadeiras, apoiar 
 ## 📚 Índice
 - [▶️ Como rodar o projeto](#como-rodar-o-projeto)
 - [🔐 Autenticação](#-autenticação)
+- [🧪 Arquivos de testes ](#-arquivos-de-testes)
 - [📦 Submissões `/submission`](#-submissões-submission)
   - [GET `/submission`](#-get-submission)
   - [GET `/submission/filter`](#-get-submissionfilter)
@@ -79,6 +80,18 @@ A autenticação é feita via **JWT**. Para acessar rotas protegidas, envie o to
 Authorization: Bearer <seu_token>
 ```
 
+---
+
+## 🧪 Arquivos de Teste `.http`
+
+Há arquivos `.http` com requisições prontas para facilitar os testes da API. Eles funcionam com a extensão **REST Client** do VS Code e outras ferramentas como **Insomnia** ou **Postman**.
+
+**Inclui exemplos para:**
+- Login e registro de usuário
+- CRUD de submissões
+- Alteração de permissões
+
+> 📌 **Edite os valores** como `<token>`, `<id>`, `<title>`, etc., antes de enviar.
 ---
 
 ## 📦 Submissões (`/submission`)
@@ -273,6 +286,7 @@ Aqui está a versão em inglês, fiel à estrutura do original:
 ## 📚 Index
 - [▶️ How to run the project](#how-to-run-the-project)
 - [🔐 Authentication](#authentication)
+- [🧪 Test files](#test-files)
 - [📦 Submissions `/submission`](#submissions-submission)
   - [GET `/submission`](#get-submission)
   - [GET `/submission/filter`](#get-submissionfilter)
@@ -329,6 +343,19 @@ Authentication is handled via **JWT**. To access protected routes, send the toke
 ```http
 Authorization: Bearer <your_token>
 ```
+
+---
+
+## 🧪 Test Files `.http`
+
+There are `.http` files with ready-to-use requests to make API testing easier. They work with the **REST Client** extension for VS Code and tools like **Insomnia** or **Postman**.
+
+**Includes examples for:**
+- User login and registration  
+- Submissions CRUD  
+- Role updates
+
+> 📌 **Edit values** like `<token>`, `<id>`, `<title>`, etc., before sending the requests.
 
 ---
 
