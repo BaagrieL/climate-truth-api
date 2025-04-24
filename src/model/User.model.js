@@ -8,7 +8,7 @@ class User {
      * Creates a new user.
      * @param {{ id: string, username: string, password: string, role: number }} data - The data of the user. The role property is an integer that represents the user's role in the system.
      */
-    constructor({ id, username, password, role = "" }) {
+    constructor({ id, username, password, role = "common" }) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -42,7 +42,7 @@ class User {
     static getUserById(id) {
         const user = User.#_users.get(id);
 
-        if (!user) return null;
+        if (!user) throw new Error("User not found");
 
         return User.#_users.get(id);
     }
@@ -68,17 +68,12 @@ class User {
      */
     static verifyUserData( username, password ) {
         if (!username || !password) return null;
-        console.log(User.#_users.values());
 
-        for (const user of User.#_users.values()) {
-            
+        for (const user of User.#_users.values()) {            
             if (user.username === username && user.password === password) {
-                console.log(user);
                 return user;
             }
-        }
-        console.log(username, password);
-        
+        }        
 
         return null;
     }
@@ -114,7 +109,7 @@ class User {
      * @param {Object} newData - The new data to update. The username, password and role properties are optional.
      * @returns {User | null} The updated user or null if not found.
      */
-    update(id, newData) {
+    static update(id, newData) {
         const user = User.#_users.get(id);
 
         if (!user) return null;
@@ -129,6 +124,25 @@ class User {
         User.#_userStorage.write(Array.from(User.#_users));
 
         return User.#_users.get(id);
+    }
+
+    /**
+     * Sets a user's role by their id.
+     * @param {string} id - The id of the user to set the role.
+     * @param {string} role - The new role of the user.
+     * @returns {User | null} The updated user or null if not found.
+     * @throws {Error} If the user is not found or if the role is not provided.
+     */
+    static setRole(id, role) {
+        let user = User.getUserById(id);
+        
+        if (!user) throw new Error("User not found");
+        if (!role) throw new Error("Role is required");
+        
+        user.role = role;
+        user = User.update(id, user);        
+
+        return user;
     }
 
 }

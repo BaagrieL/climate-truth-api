@@ -14,7 +14,7 @@ class AuthControler {
         
         if (!user) return res.status(401).json({ error: "Invalid credentials" });
 
-        const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user.id, username: user.username, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
         return res.json({ token });
     }
 
@@ -37,6 +37,21 @@ class AuthControler {
 
     listAllUsers(req, res) {
         return res.status(200).json(User.list());
+    }
+
+    updateUserRole(req, res) {
+        const { id } = req.params;
+        const { role } = req.body;
+
+        if (!role) return res.status(400).json({ error: "Role is required" });
+
+        try {
+            User.setRole(id, role);
+            
+            return res.status(200).json({ message: "User updated successfully" });
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
     }
 }
 
