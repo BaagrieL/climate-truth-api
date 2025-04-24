@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken");
+const { UserController } = require("../controller/User.controller");
+
+const userController = new UserController();
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -8,14 +11,13 @@ function authenticateToken(req, res, next) {
         return res.status(401).json({ error: "Token não fornecido." });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            return res.status(403).json({ error: "Token inválido ou expirado." });
-        }
-
-        req.user = user;
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = userController.getById(decoded.id);
         next();
-    });
+    } catch (error) {        
+        return res.status(403).json({ error: "Token inválido ou expirado." });
+    }
 }
 
 module.exports = authenticateToken;
