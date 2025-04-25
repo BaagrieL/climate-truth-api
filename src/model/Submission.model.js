@@ -27,7 +27,7 @@ class Submission {
 
     /**
      * Create a new submission.
-     * @param {{ id: string, title: string, content: string, type: string }} data - The data of the submission.
+     * @param {{ id: string, title: string, content: string, type: string, status: string }} data - The data of the submission.
      */
     constructor({ id, title, content, type }) {
         this.id = id;
