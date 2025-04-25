@@ -34,7 +34,7 @@ class Submission {
         this.title = title;
         this.content = content;
         this.type = type;
-        this.status = "pendente";
+        this.status = "pending";
     }
 
     /**
